@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edit post</title>
+</head>
+
+<body>
+    <form action="/posts/{{post.id}}/edit" method="POST">
+        <input type="text" name="post_title" id="post_title">
+        <label for="post_title">Post Title</label>
+        <input type="text" name="post_content" id="post_content">
+        <label for="post_content">Post Content</label>
+        <button type="submit">submit</button>
+    </form>
+
+</body>
+
+</html>

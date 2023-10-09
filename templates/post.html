@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post</title>
+</head>
+
+<body>
+    <h4>{{post.post_title}}</h4>
+
+    <p>{{post.post_content}}</p>
+
+    <div>
+        <form action="">
+            <button formaction="/posts/{{post.id}}/edit" formmethod="GET">Edit Post</button>
+
+            <button formaction="/posts/{{post.id}}/delete" formmethod="POST">Delete Post</button>
+        </form>
+    </div>
+
+</body>
+
+</html>
