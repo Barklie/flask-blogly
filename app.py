@@ -1,7 +1,7 @@
 """Blogly application."""
 
 from flask import Flask, request, render_template, redirect
-from models import db, connect_db, User, Post
+from models import db, connect_db, User, Post, Tag, PostTag
 from sqlalchemy import text
 # from flask_debugtoolbar import DebugToolbarExtension
 
@@ -106,16 +106,18 @@ def route_posts(user_id):
 
     if request.method == 'GET':
         user = User.query.get_or_404(user_id)
-        return render_template("new_post.html", user=user)
+        tags = Tag.query.all()
+        return render_template("new_post.html", user=user, tags=tags)
 
     else:
         user = User.query.get_or_404(user_id)
-        
 
         post_title = request.form['post_title']
         post_content = request.form['post_content']
 
         new_post = Post(post_title=post_title, post_content=post_content, posters_id=user.id)
+
+        new_post_tag = PostTag()
 
         db.session.add(new_post)
         db.session.commit()  
@@ -143,6 +145,7 @@ def delete_post(post_id):
 
 @app.route('/posts/<int:post_id>/edit', methods=["GET", "POST"])
 def edit_post(post_id):
+
     """Edits User Data"""
 
     if request.method == 'GET':
@@ -161,3 +164,35 @@ def edit_post(post_id):
         db.session.commit()
 
     return redirect('/users')
+
+
+@app.route('/tags')
+def get_tags():
+    tags = Tag.query.all()
+
+    return render_template('tags.html', tags=tags)
+
+
+@app.route('/tags/new', methods=["GET", "POST"])
+def new_tag():
+        if request.method == 'GET':
+            return render_template('new_tag.html')
+        else:
+            tag_name = request.form['tag_name']
+
+            new_tag = Tag(name=tag_name)
+            db.session.add(new_tag)
+            db.session.commit()
+
+            return redirect('/users')
+        
+@app.route('/tags/<int:tag_id>')
+def tagged_posts(tag_id):
+    tag = Tag.query.get_or_404(tag_id)
+
+    # tag_posts =
+
+
+    return render_template('tag.html', tag=tag)
+        
+

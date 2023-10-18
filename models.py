@@ -52,6 +52,35 @@ class Post(db.Model):
     posters_id = db.Column(db.Integer,
                            db.ForeignKey('users.id'))
     
+    post_tags = db.relationship('PostTag', backref='Post')
+    
     def update_post(self, new_title, new_content):
         self.post_title = new_title
         self.post_content = new_content
+
+
+class Tag(db.Model):
+    __tablename__ = 'tags'
+
+    id = db.Column(db.Integer,
+                   primary_key=True,
+                   autoincrement=True)
+    name = db.Column(db.String(15),
+                     unique=True,
+                     nullable=False)
+    
+    post_tags = db.relationship('PostTag', backref='Tag')
+    
+class PostTag(db.Model):
+
+    __tablename__ = 'post_tags'
+    post_id = db.Column(db.Integer,
+                        db.ForeignKey('posts.id'),
+                        primary_key=True
+                        )
+
+    tag_id = db.Column(db.Integer,
+                        db.ForeignKey('tags.id'),
+                        primary_key=True
+                        )
+

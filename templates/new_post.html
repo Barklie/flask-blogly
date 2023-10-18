@@ -9,11 +9,25 @@
 
 <body>
     <form action="/users/{{user.id}}/posts/new" method="POST">
+        <label for="post_title">Post Title:</label>
         <input type="text" name="post_title" id="post_title">
-        <label for="post_title">Post Title</label>
+
+        <label for="post_content">Post Content:</label>
         <input type="text" name="post_content" id="post_content">
-        <label for="post_content">Post Content</label>
+
+
+        <br>
+        <p>Tags:</p>
+        {% for tag in tags %}
+        <label for="{{tag.name}}">{{tag.name}}</label> <input type="checkbox" name="{{tag.name}}">
+        {% endfor %}
+
+        <br>
+        <br>
+
+
         <button type="submit">submit</button>
+
     </form>
 
 </body>

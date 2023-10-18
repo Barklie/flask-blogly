@@ -13,7 +13,15 @@
         <label for="post_title">Post Title</label>
         <input type="text" name="post_content" id="post_content">
         <label for="post_content">Post Content</label>
+
+        <p>Tags:</p>
+        {% for tag in tags %}
+        <label for="{{tag.name}}">{{tag.name}}</label> <input type="checkbox" name="{{tag.name}}">
+        {% endfor %}
+
         <button type="submit">submit</button>
+
+
     </form>
 
 </body>
