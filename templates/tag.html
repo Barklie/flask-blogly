@@ -8,7 +8,33 @@
 </head>
 
 <body>
-    for
+    <p>Tags:</p>
+    <ul>
+
+        {% for post_tag in post_tags %}
+
+        {% if tag.id == post_tag.tag_id %}
+
+        {% for post in posts %}
+
+
+
+        {% if post.id == post_tag.post_id %}
+
+
+        <li>
+            <a href="/users/{{posts.user_id}}/posts/{{post.id}}">{{post.post_title}}</a>
+        </li>
+
+
+        {% endif %}
+
+        {% endfor %}
+
+        {% endif %}
+
+        {% endfor %}
+    </ul>
 
 
 </body>

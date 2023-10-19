@@ -12,6 +12,34 @@
 
     <p>{{post.post_content}}</p>
 
+    <p>Tags:</p>
+    <ul>
+
+        {% for post_tag in post_tags %}
+
+        {% if post.id == post_tag.post_id %}
+
+        {% for tag in tags %}
+
+
+
+        {% if tag.id == post_tag.tag_id %}
+
+
+        <li>
+            <a href="/tags/{{tag.id}}">{{tag.name}}</a>
+        </li>
+
+
+        {% endif %}
+
+        {% endfor %}
+
+        {% endif %}
+
+        {% endfor %}
+    </ul>
+
     <div>
         <form action="">
             <button formaction="/posts/{{post.id}}/edit" formmethod="GET">Edit Post</button>
